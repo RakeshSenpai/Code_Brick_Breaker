@@ -41,6 +41,7 @@ window.onload = function(){
 
 function update(){
     requestAnimationFrame(update)
+    context.clearRect(0, 0, board.width, board.height)
 
 // Player
     context.fillStyle = 'red';
@@ -48,10 +49,22 @@ function update(){
 
 }
 
+function outOfBounce(xPosition){
+    return (xPosition < 0 || xPosition + playerWidth > boardWidth);
+}
+
 function movePlayer(e){
     if(e.code == 'ArrowLeft'){
-        player.x -= player.VelocityX
+        // player.x -= player.VelocityX
+        let nextPlayerX = player.x - player.VelocityX
+        if(!outOfBounce(nextPlayerX)){
+            player.x = nextPlayerX;
+        }
     } else if(e.code == 'ArrowRight'){
-        player.x += player.VelocityX;
+        // player.x += player.VelocityX;
+        let nextPlayerX = player.x + player.VelocityX
+        if(!outOfBounce(nextPlayerX)){
+            player.x = nextPlayerX
+        }
     }
 }
