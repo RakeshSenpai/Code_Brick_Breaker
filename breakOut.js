@@ -17,10 +17,25 @@ let player = {
     y : boardHeight - playerHeight - 5,
     width : playerWidth,
     height : playerHeight,
-    VelocityX : playerVelocityX
+    velocityX : playerVelocityX
 };
 
 
+// Ball
+let ballWidth = 10;
+let ballHeight = 10;
+let ballVelocityX = 3;
+let ballVelocityY = 3;
+
+let ball = {
+    x : boardWidth/2,
+    y : boardHeight/2,
+    width : ballWidth,
+    height : ballHeight,
+    velocityX : ballVelocityX,
+    velocityY : ballVelocityY
+    
+}
 
 
 window.onload = function(){
@@ -39,6 +54,8 @@ window.onload = function(){
     document.addEventListener('keydown', movePlayer)
 }
 
+// update
+
 function update(){
     requestAnimationFrame(update)
     context.clearRect(0, 0, board.width, board.height)
@@ -47,22 +64,31 @@ function update(){
     context.fillStyle = 'red';
     context.fillRect(player.x, player.y, player.width, player.height);
 
+    context.fillStyle = 'white'
+    ball.x += ball.velocityX;
+    ball.y += ball.velocityY;
+
+    context.fillRect(ball.x, ball.y, ball.width, ball.height);
+
 }
 
+// outOfBounce
 function outOfBounce(xPosition){
     return (xPosition < 0 || xPosition + playerWidth > boardWidth);
 }
 
+
+// movePlayer
 function movePlayer(e){
     if(e.code == 'ArrowLeft'){
         // player.x -= player.VelocityX
-        let nextPlayerX = player.x - player.VelocityX
+        let nextPlayerX = player.x - player.velocityX
         if(!outOfBounce(nextPlayerX)){
             player.x = nextPlayerX;
         }
     } else if(e.code == 'ArrowRight'){
         // player.x += player.VelocityX;
-        let nextPlayerX = player.x + player.VelocityX
+        let nextPlayerX = player.x + player.velocityX
         if(!outOfBounce(nextPlayerX)){
             player.x = nextPlayerX
         }
