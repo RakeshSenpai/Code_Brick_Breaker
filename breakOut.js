@@ -25,7 +25,7 @@ let player = {
 let ballWidth = 10;
 let ballHeight = 10;
 let ballVelocityX = 3;
-let ballVelocityY = 3;
+let ballVelocityY = 2;
 
 let ball = {
     x : boardWidth/2,
@@ -69,6 +69,21 @@ function update(){
     ball.y += ball.velocityY;
 
     context.fillRect(ball.x, ball.y, ball.width, ball.height);
+
+    // Bounce ball off walls
+    if(ball.y <= 0){
+        // if ball touches top of canvas
+        ball.velocityY *= -1;//Reverse the direction
+    }
+    else if(ball.x <= 0 || (ball.x + ball.width) >= boardWidth){
+        // if ball touches the left or right of the canvas
+        ball.velocityX *= -1
+    }
+    else if(ball.y + ball.height >= boardHeight){
+        // if ball touches bottom of canvas
+        console.log('Game is over');
+
+    }
 
 }
 
