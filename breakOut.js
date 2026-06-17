@@ -81,8 +81,7 @@ function update(){
     }
     else if(ball.y + ball.height >= boardHeight){
         // if ball touches bottom of canvas
-        console.log('Game is over');
-
+        // console.log('Game is over');
     }
 
 }
@@ -108,4 +107,8 @@ function movePlayer(e){
             player.x = nextPlayerX
         }
     }
+}
+
+function detectCollision(a, b){
+    
 }
