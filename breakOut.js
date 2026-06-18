@@ -117,5 +117,5 @@ function detectCollision(a, b){
 }
 
 function topCollision(ball, block){
-    
+    return detectCollision(ball, block) && (ball.y + ball.height) >= block.y;
 }
