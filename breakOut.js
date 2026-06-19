@@ -120,5 +120,3 @@ function topCollision(ball, block){
     return detectCollision(ball, block) && (ball.y + ball.height) >= block.y;
 }
 
-console.log('wall collision')
-console.log('Top collision')
