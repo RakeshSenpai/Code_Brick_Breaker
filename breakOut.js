@@ -121,3 +121,4 @@ function topCollision(ball, block){
 }
 
 console.log('wall collision')
+console.log('Top collision')
