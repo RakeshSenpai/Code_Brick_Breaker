@@ -120,3 +120,4 @@ function topCollision(ball, block){
     return detectCollision(ball, block) && (ball.y + ball.height) >= block.y;
 }
 
+console.log('brick break out')
