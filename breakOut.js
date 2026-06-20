@@ -121,3 +121,4 @@ function topCollision(ball, block){
 }
 
 console.log('brick break out')
+console.log('soving brick error')
