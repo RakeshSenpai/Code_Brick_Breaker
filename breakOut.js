@@ -119,6 +119,3 @@ function detectCollision(a, b){
 function topCollision(ball, block){
     return detectCollision(ball, block) && (ball.y + ball.height) >= block.y;
 }
-
-console.log('brick break out')
-console.log('soving brick error')
