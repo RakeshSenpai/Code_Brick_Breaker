@@ -123,3 +123,7 @@ function topCollision(ball, block){ // a is avobe b (ball is avobe block)
 function bottomCollision(ball, block){
     return detectCollision(ball, block) && (block.y + block.height) >= ball.y;
 }
+
+function leftCollision(ball, block){
+    return detectCollision(ball, block) && (ball.x + ball.width) >= block.x;
+}
