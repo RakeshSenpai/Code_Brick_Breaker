@@ -110,13 +110,16 @@ function movePlayer(e){
 }
 
 function detectCollision(a, b){
-    return a.x < b.x + b.width &&
-           a.x + b.width > b.x &&
-           a.y < b.y + b.height &&
-           a.y + a.height > b.y;
+    return a.x < b.x + b.width && // a's top left corner doesnot reaches b's top right corner
+           a.x + b.width > b.x && // a's top right corner passes b's top left corner
+           a.y < b.y + b.height && // a's top left corner doesnot reaches b's bottom left corner
+           a.y + a.height > b.y; // a's bottom left corner passes b's bottom left corner
 }
 
-function topCollision(ball, block){
+function topCollision(ball, block){ // a is avobe b (ball is avobe block)
     return detectCollision(ball, block) && (ball.y + ball.height) >= block.y;
 }
-console.log('brick breaker')
+
+function bottomCollision(ball, block){
+    return detectCollision(ball, block) && (block.y + block.height) >= ball.y;
+}
