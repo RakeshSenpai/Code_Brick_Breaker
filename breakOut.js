@@ -84,6 +84,15 @@ function update(){
         // console.log('Game is over');
     }
 
+    if(topCollision(ball, player) || bottomCollision(ball, player)){
+        ball.velocityY *= -1;
+    }
+
+    else if(leftCollision(ball, player) || rightCollision(ball, player)){
+        ball.velocityX *= -1
+    }
+
+
 }
 
 // outOfBounce
@@ -111,7 +120,7 @@ function movePlayer(e){
 
 function detectCollision(a, b){
     return a.x < b.x + b.width && // a's top left corner doesnot reaches b's top right corner
-           a.x + b.width > b.x && // a's top right corner passes b's top left corner
+           a.x + a.width > b.x && // a's top right corner passes b's top left corner
            a.y < b.y + b.height && // a's top left corner doesnot reaches b's bottom left corner
            a.y + a.height > b.y; // a's bottom left corner passes b's bottom left corner
 }
