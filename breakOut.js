@@ -127,3 +127,7 @@ function bottomCollision(ball, block){
 function leftCollision(ball, block){
     return detectCollision(ball, block) && (ball.x + ball.width) >= block.x;
 }
+
+function rightCollision(ball, block){
+    return detectCollision(ball, block) && (block.x + block.width) >= ball.x;
+}
