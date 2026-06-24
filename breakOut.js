@@ -140,3 +140,5 @@ function leftCollision(ball, block){
 function rightCollision(ball, block){
     return detectCollision(ball, block) && (block.x + block.width) >= ball.x;
 }
+
+console.log('collision break')
