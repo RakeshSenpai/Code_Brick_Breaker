@@ -144,3 +144,4 @@ function rightCollision(ball, block){
 console.log('collision break')
 console.log('collision break')
 console.log('collision break')
+console.log('collision break')
