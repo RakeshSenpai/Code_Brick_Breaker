@@ -51,7 +51,7 @@ let blockCount = 0;
 // starting block corner top left
 let blockX = 15;
 let blockY = 45;
-
+ 
 
 window.onload = function(){
     board = document.getElementById('board')
@@ -67,6 +67,10 @@ window.onload = function(){
     requestAnimationFrame(update);
 
     document.addEventListener('keydown', movePlayer)
+
+    // create Blocks
+
+    createBlock()
 }
 
 // update
@@ -156,4 +160,24 @@ function leftCollision(ball, block){
 
 function rightCollision(ball, block){
     return detectCollision(ball, block) && (block.x + block.width) >= ball.x;
+}
+
+
+function createBlock(){
+    blockArray = [];
+    for(let c = 0; c < blockColumns; c++)   {
+        for(let r = 0 ; r < blockRows; r++){
+            let block = {
+                x : blockX + c*blockWidth,
+                y : blockY + r*blockHeight,
+                width: blockWidth,
+                height: blockHeight,
+                break : false
+            }
+
+            blockArray.push(block);
+        }
+    }
+
+    blockCount = blockArray.length;
 }
