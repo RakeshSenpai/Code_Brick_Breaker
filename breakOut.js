@@ -10,7 +10,7 @@ let context;
 
 let playerHeight = 10;
 let playerWidth = 80;
-let playerVelocityX = 10;
+let playerVelocityX = 20;
 
 let player = {
     x : boardWidth/2 - playerWidth / 2,
@@ -52,6 +52,7 @@ let blockCount = 0;
 let blockX = 15;
 let blockY = 45;
  
+let score = 0;
 
 window.onload = function(){
     board = document.getElementById('board')
@@ -113,7 +114,32 @@ function update(){
         ball.velocityX *= -1
     }
 
+    //blocks
 
+    context.fillStyle = 'skyblue'; 
+    for(let i = 0; i < blockArray.length; i++){
+        let block = blockArray[i];
+        if(!block.break){
+            if(topCollision(ball, block) || bottomCollision(ball, block)){
+                block.break = true;
+                ball.velocityY *= -1
+                blockCount -= 1
+                score += 100;
+            }
+
+            else if(leftCollision(ball, block) || rightCollision(ball, block)){
+                block.break = true;
+                ball.velocityX *= -1;
+                blockCount -= 1;
+                score += 100;
+            }
+
+            context.fillRect(block.x, block.y, block.width, block.height)
+        }
+    }
+
+    context.font = '20px sans-serif';
+    context.fillText(score, 10, 25)
 }
 
 // outOfBounce
@@ -168,8 +194,8 @@ function createBlock(){
     for(let c = 0; c < blockColumns; c++)   {
         for(let r = 0 ; r < blockRows; r++){
             let block = {
-                x : blockX + c*blockWidth,
-                y : blockY + r*blockHeight,
+                x : blockX + c*blockWidth + c*10, // c*10 space 10px apart columns
+                y : blockY + r*blockHeight + r*10,// c*10 space 10px apart rows 
                 width: blockWidth,
                 height: blockHeight,
                 break : false
