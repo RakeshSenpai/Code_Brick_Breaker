@@ -10,7 +10,7 @@ let context;
 
 let playerHeight = 10;
 let playerWidth = 80;
-let playerVelocityX = 20;
+let playerVelocityX = 30;
 
 let player = {
     x : boardWidth/2 - playerWidth / 2,
@@ -24,8 +24,8 @@ let player = {
 // Ball
 let ballWidth = 10;
 let ballHeight = 10;
-let ballVelocityX = 3;
-let ballVelocityY = 2;
+let ballVelocityX = 4;
+let ballVelocityY = 3;
 
 let ball = {
     x : boardWidth/2,
@@ -53,6 +53,7 @@ let blockX = 15;
 let blockY = 45;
  
 let score = 0;
+let gameOver = false;
 
 window.onload = function(){
     board = document.getElementById('board')
@@ -78,6 +79,9 @@ window.onload = function(){
 
 function update(){
     requestAnimationFrame(update)
+    if(gameOver){
+        return;
+    }
     context.clearRect(0, 0, board.width, board.height)
 
 // Player
@@ -102,6 +106,9 @@ function update(){
     else if(ball.y + ball.height >= boardHeight){
         // if ball touches bottom of canvas
         // console.log('Game is over');
+        context.font = '20px sans-serif';
+        context.fillText('Game over press "space" to restart the game', 50, 400);
+        gameOver = true;
     }
 
     //bounce the ball off the player paddle
@@ -138,6 +145,14 @@ function update(){
         }
     }
 
+    //next Level
+
+    if(blockCount == 0){
+        score += 100*blockRows*blockColumns;
+        blockRows = Math.min(blockRows + 1, blockMaxRow)
+        createBlock();
+    }
+
     context.font = '20px sans-serif';
     context.fillText(score, 10, 25)
 }
@@ -150,6 +165,12 @@ function outOfBounce(xPosition){
 
 // movePlayer
 function movePlayer(e){
+
+    if(gameOver){
+        if(e.code == 'Space'){
+             resetGame()
+        }
+    }
     if(e.code == 'ArrowLeft'){
         // player.x -= player.VelocityX
         let nextPlayerX = player.x - player.velocityX
@@ -206,4 +227,30 @@ function createBlock(){
     }
 
     blockCount = blockArray.length;
+}
+
+
+function resetGame(){
+    gameOver = false;
+ player = {
+    x : boardWidth/2 - playerWidth / 2,
+    y : boardHeight - playerHeight - 5,
+    width : playerWidth,
+    height : playerHeight,
+    velocityX : playerVelocityX
+};
+ ball = {
+    x : boardWidth/2,
+    y : boardHeight/2,
+    width : ballWidth,
+    height : ballHeight,
+    velocityX : ballVelocityX,
+    velocityY : ballVelocityY
+    
+}
+blockArray = []
+score = 0 
+blockRows = 3;
+createBlock()
+
 }
