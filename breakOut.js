@@ -38,6 +38,21 @@ let ball = {
 }
 
 
+// Blocks
+
+let blockArray = [];
+let blockHeight = 10;
+let blockWidth = 50;
+let blockColumns = 8;
+let blockRows = 3;
+let blockMaxRow = 10;
+let blockCount = 0;
+
+// starting block corner top left
+let blockX = 15;
+let blockY = 45;
+
+
 window.onload = function(){
     board = document.getElementById('board')
     board.height = boardHeight;
@@ -83,6 +98,8 @@ function update(){
         // if ball touches bottom of canvas
         // console.log('Game is over');
     }
+
+    //bounce the ball off the player paddle
 
     if(topCollision(ball, player) || bottomCollision(ball, player)){
         ball.velocityY *= -1;
@@ -140,8 +157,3 @@ function leftCollision(ball, block){
 function rightCollision(ball, block){
     return detectCollision(ball, block) && (block.x + block.width) >= ball.x;
 }
-
-console.log('collision break')
-console.log('collision break')
-console.log('collision break')
-console.log('collision break')
